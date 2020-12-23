@@ -10,10 +10,26 @@ This repository contains the necessary tools to run a Jitsi Meet stack on [Docke
 
 ## Installation
 
-The installation manual is available [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker).
-
-## TODO
-
-* Support container replicas (where applicable).
-* TURN server.
+Download and extract the latest release
+Alternatively, to test the latest changes clone the repository: 
+```bash 
+git clone https://github.com/jitsi/docker-jitsi-meet && cd docker-jitsi-meet
+```
+Create a .env file by copying and adjusting env.example
+```bash 
+cp env.example .env
+```
+Set strong passwords in the security section options of .env file by running the following bash script
+```bash 
+./gen-passwords.sh
+```
+Create required CONFIG directories
+```bash 
+mkdir -p ~/.jitsi-meet-cfg/{web/letsencrypt,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
+For Windows: echo web/letsencrypt,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri | % { mkdir "~/.jitsi-meet-cfg/$_" }
+```
+Run 
+```bash 
+docker-compose up -d
+```
 
